@@ -1,3 +1,4 @@
+from copy import deepcopy
 import datetime
 users = [
     {
@@ -271,14 +272,14 @@ print(list_example)  # Output: [1, 2, 2, 4, 4, 5, 5, 5, 6]
 set_example = set(list_example)
 print(set_example)  # Output: {1, 2, 4, 5, 6} - дубликаты удалены
 
-# МНОЖЕСТВА (SET)
+# МНОЖЕСТВА (SET) {}
 # в наборках set можно добавлять только неизменяемые типы данных (числа, строки, кортежи)
 my_set = {1, 2, ('John', 'Pork')}
 print(my_set)  # Output: {1, 2, ('John', 'Pork')}
-# list — можно менять
-# tuple — нельзя менять
-# set — без порядка и без повторов
-# dict — ключи и значения
+# list — можно менять []
+# tuple — нельзя менять ()
+# set — без порядка и без повторов {}.  пустой набор my_set = set()
+# dict — ключи и значения {a: 1}
 my_set2 = set()
 print(my_set2)  # Output: set() - пустое множество
 my_set2.add(3)  # добавление элемента в множество
@@ -332,3 +333,45 @@ print(big_nums & copied_bignums)  # пересечение множеств
 print(big_nums.symmetric_difference(copied_bignums))
 # то же самое что и выше  (.symmetric_difference)
 print((big_nums | copied_bignums) - (big_nums & copied_bignums))
+
+
+working_int = {7, 4, 6, 100, 100}
+print(working_int)
+working_int.add(1)
+print(working_int)
+working_inttwo = {7, 40, 100, 9}
+print(working_int & working_inttwo)
+# working_inthree = working_int & working_inttwo  # по-сути я сделал всё верно
+working_inthree = working_int.intersection(working_inttwo)
+working_list = list(working_inthree)
+print(working_list)
+print(working_int)
+
+
+# range - диапазоны
+my_range = range(7)
+print(my_range)
+# Output: [0, 1, 2, 3, 4, 5, 6] - список из диапазона range (не включается последняя цифра)
+print(list(my_range))
+my_range1 = range(10, 20, 3)
+print(my_range1)
+# Output: [10, 13, 16, 19] благодаря step=3 мы делаем шаг по 3 элемента
+print(list(my_range1))
+
+
+# ZIP
+fruits = ['apple', 'banana', 'cherry', 'date', 'elderberry']
+numbers = [1, 2, 3, 4, 5, 6]
+zip_frutsnumbers = zip(fruits, numbers)
+print(zip_frutsnumbers)
+# но если конвертировать в список (list), то получим список кортежей
+print(dict(zip_frutsnumbers))
+
+# чтоб сделать полную копию обьекта, можно использовать модуль deepcopy. При обычном модуле copy у нас какой-нибудь вложенный список может ссылиться на изначальную id обьекта, из-за чего изменится и начальный обьект
+my_pc
+my_pc_copy = deepcopy(my_pc)
+print(my_pc)
+print(my_pc_copy)
+my_pc_copy['mouse'] = 'Steelseries'
+print(my_pc)
+print(my_pc_copy)

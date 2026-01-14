@@ -2,6 +2,7 @@ list_of_tobaccos = {}
 
 
 def keys_and_values():
+    # range(1) количество повторяющихся вызовов, стоит подумать как это использовать для цикла
     for i in range(1):
         key = input("Enter name tobacco: ")
         value = input("Enter rating: ")
@@ -22,6 +23,7 @@ if user_input == 'Y':
     if user_input == 'Y':
         keys_and_values()
         print("You added new tobacco!")
+        print(f"Tobacco name: {key} | RATING: {value}")
         for key, value in list_of_tobaccos.items():      # итерация по ключам и значениям словаря ФИКС
             print(f"Tobacco name: {key} | RATING: {value}")
             print(keys_and_values())
