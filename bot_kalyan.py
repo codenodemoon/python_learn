@@ -1,3 +1,4 @@
+from datetime import date
 from copy import deepcopy
 import datetime
 users = [
@@ -361,7 +362,7 @@ print(list(my_range1))
 
 # ZIP
 fruits = ['apple', 'banana', 'cherry', 'date', 'elderberry']
-numbers = [1, 2, 3, 4, 5, 6]
+numbers = [1, 2, 3, 4, 5,]
 zip_frutsnumbers = zip(fruits, numbers)
 print(zip_frutsnumbers)
 # но если конвертировать в список (list), то получим список кортежей
@@ -375,3 +376,117 @@ print(my_pc_copy)
 my_pc_copy['mouse'] = 'Steelseries'
 print(my_pc)
 print(my_pc_copy)
+
+
+# функции.    pass - для пустой функции
+def increase_person_age(age):
+    # age.copy для того, чтоб не изменять через функцию обьекты вне
+    person_copy = age.copy()
+    person_copy['age'] += 1
+    return person_copy
+
+
+person_one = {
+    'name': 'John',
+    'age': 20
+}
+new_person = increase_person_age(person_one)
+print(new_person['age'])  # Output: 21
+print(person_one['age'])  # Output: 20
+
+
+def merge_lists_to_dict(a, b):
+    merge = dict(zip(a, b))
+    # print(dict(merge))
+    return merge
+
+
+a = fruits
+b = numbers
+print(merge_lists_to_dict(a, b))
+
+
+def sum_nums(*args):  # *args - аргументы в виде кортежа благодаря *
+    print(args)
+    print(type(args))
+    print(args[0])
+    return sum(args)
+
+
+print(sum_nums(2, 3, 7))
+
+
+def get_posts_info(name, id):
+    info = f"Name: {name} with id {id}"
+    return info
+
+
+info = get_posts_info(name='John Pork', id=1)
+print(info)
+
+
+def get_posts_info(**kwargs):
+    print(kwargs)
+    info = (
+        f"{kwargs['name']} with"
+        f" id {kwargs['id']}"
+    )
+    return info
+
+
+info = get_posts_info(name='John Pork', id=1)
+print(info)
+
+# позиционные аргументы можно передавать в кортеж с *abc, а именованные только в **abc в словарь
+
+
+def merge_lists_to_dict(a, b):
+    merge = dict(zip(a, b))
+    # print(dict(merge))
+    return merge
+
+
+a = fruits
+b = numbers
+print(merge_lists_to_dict(fruits, b=numbers))
+
+
+def update_car_info(**car):
+    # car_f = dict(zip(brand, price))
+    car['is_available'] = True
+    return car
+
+
+brand = 'Toyota'
+price = 202000
+print(update_car_info(brand=brand, price=price))
+
+# значение параметров по умолчанию
+
+
+def mult_by_factor(value, multiplier=2):
+    return value * multiplier
+
+
+print(mult_by_factor(5))
+print(mult_by_factor(5, 3))
+
+
+def get_weekday():
+    return date.today().strftime("%A")
+
+
+def create_new_post(post, weekday=get_weekday()):
+    post_copy = post.copy()
+    post_copy['created_on_weekday'] = weekday
+    return post_copy
+
+
+initial_post = {
+    'id': 'JOHN PORK',
+    'views': 1000
+}
+new_post = create_new_post(initial_post)
+
+post_with_weekday = create_new_post(post=initial_post, weekday=get_weekday())
+print(post_with_weekday)

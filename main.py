@@ -65,6 +65,7 @@ print("Program finished.")
 
 
 def sum_name():
+    # инпут лучше держать вне функции. функция это про логику, не ввод
     a = input("Enter your name: ")
     b = str("John Pork")
     c = datetime.datetime.now()
